@@ -2,7 +2,7 @@ def create_cookbook():
     cookbook = dict()
     dish_list = list()
     ingredient_list = list()
-    with open('recipes.txt', encoding='utf8') as recipes:
+    with open('recipes.TXT', encoding='utf8') as recipes:
         while True:
             dish = recipes.readline().strip()
             if not dish:
