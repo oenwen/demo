@@ -40,35 +40,38 @@ def get_shop_list(dishes):
             dishes.append(dish.strip().capitalize()) # создан список блюд dishes
         else:
             print(f'Сожалеем, блюда "{dish.strip().capitalize()}" нет в нашем меню или Вы допустили опечатку')
-    # print((dishes)) ########################################
+
     while True:
         try:
             person_count = int(input('Введите количество персон '))
             break
         except ValueError:
             print('Введите число')
+
     ingr_dict = dict()
     help_dict = dict()
-    for key, value in new_cookbook.items():
 
-        # for n, dish in enumerate(dishes):
-            # print(n,dish)
-        if key in dishes:
-            # for i, dish in enumerate(dishes):
-            #     print(i,dish)
-            for i in range(len(value)):
-                ingredient = value[i]['ingredient_name']
-                print(i,ingredient)
-                if not ingredient in ingr_dict.keys():
-                    quantity_dict = {'measure':value[i]['measure'],
-                         'quantity':(value[i]['quantity'] * person_count)}
-                    ingr_dict[ingredient] = quantity_dict
-                    help_dict[ingredient] = value[i]['quantity'] * person_count
-                else:
-                    quantity_dict = {'measure': value[i]['measure'],
-                                     'quantity': ((value[i]['quantity'] * person_count) + help_dict[ingredient])}
-                    ingr_dict[ingredient] = quantity_dict
-                    help_dict[ingredient] = quantity_dict['quantity']
+    counter = 0
+    for i, dish in enumerate(dishes):
+        if dishes.count(dish) > 1:
+            dishes[i] = dishes[i] + str(counter)
+            counter += 1
+
+    for key, value in new_cookbook.items():
+        for dish in dishes:
+            if key in dish:
+                for i in range(len(value)):
+                    ingredient = value[i]['ingredient_name']
+                    if not ingredient in ingr_dict.keys():
+                        quantity_dict = {'measure':value[i]['measure'],
+                                         'quantity':(value[i]['quantity'] * person_count)}
+                        ingr_dict[ingredient] = quantity_dict
+                        help_dict[ingredient] = value[i]['quantity'] * person_count
+                    else:
+                        quantity_dict = {'measure': value[i]['measure'],
+                                         'quantity': ((value[i]['quantity'] * person_count) + help_dict[ingredient])}
+                        ingr_dict[ingredient] = quantity_dict
+                        help_dict[ingredient] = quantity_dict['quantity']
 
     from pprint import pprint
     pprint(ingr_dict)
