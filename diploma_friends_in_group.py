@@ -31,7 +31,7 @@ for group in groups_list:
     time.sleep(0.5)
     params = get_params()
     params['group_id'] = group
-    params['filter'] = 'friends'
+    # params['filter'] = 'friends'
     print(f'* ищу друзей в группе {group}')
     response = requests.get(
         'https://api.vk.com/method/groups.getMembers',

@@ -2,6 +2,8 @@ import requests
 from pprint import pprint
 import time
 import json
+# СТРОКА 71
+# ПРОВЕРИТЬ ПРАВИЛЬНОСТЬ РАБОТЫ КОДА
 
 def get_params():
     return {
@@ -10,7 +12,7 @@ def get_params():
         'v': 5.103
     }
 
-def get_groups():
+def get_groups(): # выводит первые двести групп
     params = get_params()
     params['extended'] = 0
     print('*', 'запрашиваю список групп пользователя')
@@ -23,6 +25,7 @@ def get_groups():
 
 def get_members(): # по умолчанию get members выдает первую 1000 участников, необходимо после этого установить параметр offset (сдвиг)
     # чтобы пересмотреть следующую 1000 и т. д. до конца группы
+
     members_by_group = {}
     groups_wo_friends = {}
     groups = get_groups()
