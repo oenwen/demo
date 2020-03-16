@@ -24,7 +24,6 @@ def get_members(): # по умолчанию get members выдает перву
     groups_wo_friends = {}
     groups = get_groups()
     groups_list = groups['response']['groups']['items']
-
     for group in groups_list:
         params = get_params()
         params['group_id'] = group
@@ -35,7 +34,8 @@ def get_members(): # по умолчанию get members выдает перву
             'https://api.vk.com/method/groups.getMembers',
             params
         )     
-        if response.json()['response']['count'] == 0:                   groups_wo_friends[group] = response.json()
+        if response.json()['response']['count'] == 0:
+            groups_wo_friends[group] = response.json()
     return groups_wo_friends
 
 def groups_info():
